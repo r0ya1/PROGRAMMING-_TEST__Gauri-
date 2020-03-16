@@ -1,0 +1,54 @@
+# Python program to remove all adjacent paired duplicates from a string
+
+# Recursively removes adjacent paired duplicates from str and returns
+# new string.
+def MaxReducedString(string):
+
+    # If length of string is 1 or 0
+    if len(string) == 0 or len(string) == 1:
+        return string
+
+    # group the charecters in key value pair for unique string charecters
+    # string
+    k=[] # Defining empty list for keys from groupby
+    v=[] #Defining empty list for grouped values
+    import itertools
+    for (key,group) in itertools.groupby(string):
+        k.append(key),v.append(list(group))
+    # creation of empty list to store filtered results
+    final_string=[]
+    for i in range(len(v)):
+        #Removig paired values from the results
+        if (len(v[i])%2) == 1:
+            final_string.append(k[i])
+        else:
+            pass
+
+    if len(final_string) > 0:
+        finalOne = (''.join(final_string))
+        #print(finalOne)
+        # Performing the operation similar to previous step because we cann't call it directly due to reccurssion depth error
+        x=[]
+        y=[]
+        if len(finalOne) > 1:
+            for (key,group) in itertools.groupby(finalOne):
+                x.append(key),y.append(list(group))
+            #print(x)
+            #print(y)
+            final_string1=[]
+            for i in range(len(y)):
+                if (len(y[i])%2) == 1:
+                    final_string1.append(x[i])
+                else:
+                    pass
+            if len(final_string1) > 0:
+                print((''.join(final_string1)))
+            else:
+                print("Empty String")
+    else:
+        print("Empty String")
+
+
+
+
+MaxReducedString('aaabccddd')
